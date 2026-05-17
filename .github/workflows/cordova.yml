@@ -53,4 +53,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: notiva-release-apk
-        path: cordova-app/platforms/android/app/build/outputs/apk/**/*.apk
+        path: "**/*.apk"
