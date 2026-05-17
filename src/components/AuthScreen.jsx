@@ -330,8 +330,84 @@ export default function AuthScreen() {
               </div>
             )}
 
-            {/* Google Authentication Trigger Only */}
-            <div className="w-full font-poppins">
+            {/* Email / Password Form for Native APK Support */}
+            <form onSubmit={handleAuthSubmit} className="w-full font-poppins mb-4">
+              <div className="space-y-3 mb-4">
+                <div className="relative">
+                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                    <Mail className="w-4 h-4" />
+                  </span>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Cosmic Email Address"
+                    className="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-200/80 dark:border-white/5 bg-white dark:bg-[#18181c] focus:outline-none focus:border-[#db922b] dark:focus:border-[#db922b] focus:ring-1 focus:ring-[#db922b] text-slate-800 dark:text-white font-medium text-xs shadow-sm transition-all"
+                  />
+                </div>
+                <div className="relative">
+                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                    <KeyRound className="w-4 h-4" />
+                  </span>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Secret Password"
+                    className="w-full pl-9 pr-10 py-3 rounded-xl border border-slate-200/80 dark:border-white/5 bg-white dark:bg-[#18181c] focus:outline-none focus:border-[#db922b] dark:focus:border-[#db922b] focus:ring-1 focus:ring-[#db922b] text-slate-800 dark:text-white font-medium text-xs shadow-sm transition-all"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-[#db922b]"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-3.5 rounded-xl font-black text-white bg-[#db922b] hover:bg-[#c78223] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-[0.98] disabled:opacity-50"
+              >
+                {loading ? (
+                  <span className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
+                ) : (
+                  <>
+                    <UserCheck className="w-4 h-4" />
+                    <span>{isRegister ? "Create Space" : "Enter Space"}</span>
+                  </>
+                )}
+              </button>
+
+              <div className="flex items-center justify-between mt-4 px-1">
+                <button
+                  type="button"
+                  onClick={() => setIsRegister(!isRegister)}
+                  className="text-[10px] font-bold text-slate-400 hover:text-[#db922b] transition-colors cursor-pointer"
+                >
+                  {isRegister ? "Have an account? Login" : "Need an account? Register"}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleEnterGuest}
+                  className="text-[10px] font-black text-[#db922b] hover:text-[#c78223] transition-colors cursor-pointer flex items-center gap-1"
+                >
+                  Play as Guest <ArrowRight className="w-3 h-3" />
+                </button>
+              </div>
+            </form>
+
+            <div className="relative w-full flex items-center justify-center my-4 opacity-50 select-none">
+              <div className="absolute w-full h-[1px] bg-slate-200 dark:bg-white/10" />
+              <span className="relative bg-white dark:bg-[#121215] px-3 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">OR</span>
+            </div>
+
+            {/* Google Authentication Trigger */}
+            <div className="w-full font-poppins pb-2">
               <button
                 onClick={handleGoogleLogin}
                 disabled={loading}
@@ -347,7 +423,7 @@ export default function AuthScreen() {
                       <path fill="#FBBC05" d="M5.19 14.19c-.24-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29L1.34 6.6C.49 8.28 0 10.09 0 12s.49 3.72 1.34 5.4l3.85-2.99z" />
                       <path fill="#34A853" d="M12 24c3.24 0 5.97-1.07 7.96-2.92l-3.77-2.92c-1.11.75-2.53 1.2-4.19 1.2-3.16 0-5.88-1.66-6.81-4.55L1.34 17.8C3.32 21.32 7.34 24 12 24z" />
                     </svg>
-                    <span>Continue with Google</span>
+                    <span>Google (Browser Only)</span>
                   </>
                 )}
               </button>
