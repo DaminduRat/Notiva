@@ -47,7 +47,7 @@ jobs:
     - name: Build Android APK
       run: |
         cd cordova-app
-        cordova build android --release
+        cordova build android
 
     - name: Display Build Artifacts
       run: |
@@ -58,7 +58,7 @@ jobs:
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: notiva-release-build
+        name: notiva-installable-apk
         path: |
           **/*.apk
           **/*.aab
