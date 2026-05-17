@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ANDROID_HOME: /usr/local/lib/android/sdk
 
     steps:
     - name: Checkout Source
@@ -25,12 +27,9 @@ jobs:
         distribution: 'temurin'
         java-version: '11'
 
-    - name: Install Android SDK
-      uses: android-actions/setup-android@v2
-
-    - name: Install Global Dependencies
+    - name: Install Dependencies
       run: |
-        npm install -g cordova
+        sudo npm install -g cordova
         npm install
 
     - name: Compile Web App
