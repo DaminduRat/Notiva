@@ -49,8 +49,16 @@ jobs:
         cd cordova-app
         cordova build android --release
 
-    - name: Upload APK Artifact
+    - name: Display Build Artifacts
+      run: |
+        echo "Listing all generated APK and AAB files in the workspace:"
+        find . -name "*.apk"
+        find . -name "*.aab"
+
+    - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: notiva-release-apk
-        path: "**/*.apk"
+        name: notiva-release-build
+        path: |
+          **/*.apk
+          **/*.aab
