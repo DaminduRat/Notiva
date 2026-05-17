@@ -1,0 +1,338 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-poppins: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  --font-nunito: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-outfit: 'SF Pro Display', 'Inter', -apple-system, sans-serif;
+  
+  --color-cute-pink: #ffeef0;        
+  --color-cute-pink-dark: #ff2d55;   /* Apple Pink */
+  --color-cute-pink-text: #ff2d55;   
+  
+  --color-cute-purple: #f3f0ff;      
+  --color-cute-purple-dark: #af52de; /* Apple Purple */
+  --color-cute-purple-text: #af52de; 
+  
+  --color-cute-blue: #e8f2ff;        
+  --color-cute-blue-dark: #007aff;   /* Apple Blue */
+  --color-cute-blue-text: #007aff;   
+  
+  --color-cute-mint: #e8f9f0;        
+  --color-cute-mint-dark: #34c759;   /* Apple Green */
+  --color-cute-mint-text: #34c759;   
+  
+  --color-cute-peach: #fff7eb;       
+  --color-cute-peach-dark: #db922b;  /* Apple Notes Gold/Amber */
+  --color-cute-peach-text: #db922b;  
+  
+  --color-cute-indigo: #eef2ff;
+  --color-cute-lavender: #f9f9fb;
+}
+
+/* Custom typography overrides */
+.font-sans {
+  font-family: 'Outfit', 'Inter', -apple-system, sans-serif !important;
+}
+.font-serif {
+  font-family: 'Georgia', 'Times New Roman', serif !important;
+}
+.font-mono {
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+/* Custom Base Styles for Apple Notes UI */
+body {
+  background-color: #f5f5f7; /* Modern clean Apple Gray background */
+  min-height: 100vh;
+  color: #1d1d1f; /* Premium sharp Apple typography contrast */
+  overflow-x: hidden;
+  transition: all 0.3s ease;
+  caret-color: #db922b; /* Iconic Apple Notes caret color */
+}
+
+/* Caret & Selection Customization */
+::selection {
+  background-color: rgba(226, 165, 61, 0.25);
+  color: #1d1d1f;
+}
+
+/* Ultra-thin iOS scroll handles - Styled with Cupertino Gold */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(219, 146, 43, 0.35); /* Premium Cupertino Amber-Gold! */
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(219, 146, 43, 0.6); /* Vibrant gold on hover! */
+}
+
+/* macOS Frosted Panel Layouts */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.04),
+              0 1px 3px -1px rgba(0, 0, 0, 0.02);
+  border-radius: 18px;
+}
+
+.glass-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 14px;
+}
+
+.glass-card:hover {
+  background: #fbfaf7;
+  border-color: rgba(220, 146, 43, 0.4);
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Clean macOS Shadows */
+.soft-shadow {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.cute-shadow {
+  box-shadow: 0 2px 8px rgba(220, 146, 43, 0.05);
+}
+
+/* Click and hover transitions */
+button, select, input, textarea {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* Apple Pro styling animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Prose Markdown formatting for Apple elegance */
+.prose h1, .prose h2, .prose h3 {
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: #1d1d1f;
+  font-weight: 700;
+}
+.prose p {
+  color: #3f3f46;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* ================= DYNAMIC ACCENT OVERRIDES ================= */
+:root {
+  --nebula-accent: #db922b;
+}
+
+/* Override any tailwind amber-gold text colors */
+[class*="text-[#db922b]"],
+.text-amber-gold {
+  color: var(--nebula-accent) !important;
+}
+
+/* Override any tailwind amber-gold background colors */
+[class*="bg-[#db922b]"],
+.bg-amber-gold {
+  background-color: var(--nebula-accent) !important;
+}
+
+/* Override any tailwind amber-gold border colors */
+[class*="border-[#db922b]"],
+.border-amber-gold {
+  border-color: var(--nebula-accent) !important;
+}
+
+/* Override any gold gradient from/to stops */
+[class*="from-[#db922b]"] {
+  --tw-gradient-from: var(--nebula-accent) !important;
+  --tw-gradient-to: var(--nebula-accent) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+[class*="to-[#db922b]"] {
+  --tw-gradient-to: var(--nebula-accent) !important;
+}
+
+/* ================= PREMIUM CELESTIAL DARK MODE OVERRIDES ================= */
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  background-color: #0b0b0d !important;
+  color: #f5f5f7 !important;
+}
+
+/* Background overrides */
+html.dark .bg-white,
+html.dark .bg-slate-50,
+html.dark .bg-slate-100\/90,
+html.dark .bg-slate-100\/80,
+html.dark [class*="bg-white"],
+html.dark [class*="bg-slate-50"] {
+  background-color: #151518 !important;
+}
+
+html.dark .bg-\[\#f5f5f7\],
+html.dark .bg-\[\#f5f5f7\]\/60,
+html.dark .bg-\[\#f4f3ef\],
+html.dark .bg-slate-100 {
+  background-color: #0e0e11 !important;
+}
+
+/* Sidebar & overlay overrides */
+html.dark .bg-\[\#f3f3f3\]\/95 {
+  background-color: rgba(24, 24, 28, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+html.dark .border-r {
+  border-right-color: rgba(255, 255, 255, 0.08) !important;
+}
+html.dark [class*="bg-black/"] {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+html.dark [class*="hover:bg-black/"]:hover {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Sidebar background specific */
+html.dark .bg-slate-50\/40,
+html.dark .bg-slate-50\/30,
+html.dark [class*="bg-slate-50\/30"] {
+  background-color: #0e0e11 !important;
+}
+
+/* Text overrides */
+html.dark .text-slate-850,
+html.dark .text-slate-800,
+html.dark .text-slate-700,
+html.dark .text-slate-650,
+html.dark .text-slate-600,
+html.dark .text-slate-900,
+html.dark [class*="text-slate-850"],
+html.dark [class*="text-slate-800"],
+html.dark [class*="text-slate-700"],
+html.dark [class*="text-slate-650"],
+html.dark [class*="text-slate-600"],
+html.dark [class*="text-[#1d1d1f]"],
+html.dark [class*="text-[#48484a]"],
+html.dark [class*="text-[#3c3c43]"],
+html.dark [class*="text-[#3a3a3c]"],
+html.dark [class*="text-[#7c2d12]"] {
+  color: #e5e5ea !important;
+}
+
+html.dark .text-slate-500,
+html.dark .text-slate-400,
+html.dark [class*="text-slate-500"],
+html.dark [class*="text-slate-400"] {
+  color: #98989f !important;
+}
+
+/* Border overrides */
+html.dark .border-slate-200,
+html.dark .border-slate-150,
+html.dark .border-slate-100,
+html.dark .border-slate-250,
+html.dark .border-slate-200\/80,
+html.dark [class*="border-slate-"] {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Input boxes overrides */
+html.dark input,
+html.dark textarea,
+html.dark select,
+html.dark [contenteditable] {
+  color: #f5f5f7 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #55555c !important;
+}
+
+/* Custom specific classes */
+html.dark .glass-panel {
+  background: rgba(21, 21, 24, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+html.dark .glass-card {
+  background: #151518 !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+html.dark .glass-card:hover {
+  background: #1e1e22 !important;
+  border-color: var(--nebula-accent) !important;
+}
+
+/* Cupertino golden/ambient scrollbars for dark mode */
+html.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Cupertino checklist elements in dark mode */
+html.dark .checklist-row:hover {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}
+html.dark .table-wrapper {
+  background-color: rgba(21, 21, 24, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+html.dark .table-controls {
+  background-color: #1c1c1e !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #f5f5f7 !important;
+}
+html.dark .table-controls button {
+  background-color: #151518 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e5e5ea !important;
+}
+
+/* Apple gold highlight tags text */
+html.dark .bg-\[\#fff7eb\],
+html.dark .bg-\[\#fff7eb\]\/30,
+html.dark .bg-\[\#fff7eb\]\/35,
+html.dark .bg-\[\#fff7eb\]\/80 {
+  background-color: rgba(219, 146, 43, 0.15) !important;
+  color: var(--nebula-accent) !important;
+}
+
+/* Custom widgets and cards overrides */
+html.dark .shadow-sm,
+html.dark .shadow-md,
+html.dark .shadow-lg {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}

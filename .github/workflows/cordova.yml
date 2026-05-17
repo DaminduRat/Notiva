@@ -1,0 +1,57 @@
+name: Build Cordova APK
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Source
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Setup Java JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+
+    - name: Install Android SDK
+      uses: android-actions/setup-android@v2
+
+    - name: Install Global Dependencies
+      run: |
+        npm install -g cordova
+        npm install
+
+    - name: Compile Web App
+      run: npm run build
+
+    - name: Initialize Cordova Shell
+      run: |
+        rm -rf cordova-app
+        cordova create cordova-app com.damindur.notiva Notiva
+        cd cordova-app
+        cordova platform add android
+        rm -rf www/*
+        cp -r ../dist/* www/
+
+    - name: Build Android APK
+      run: |
+        cd cordova-app
+        cordova build android --release
+
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: notiva-release-apk
+        path: cordova-app/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
